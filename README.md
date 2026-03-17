@@ -1,4 +1,4 @@
-# Feature Selection using Forward Search (CS170 Project)
+# Feature Selection (CS170 Project)
 ## How to Run
 
 ### Compile
