@@ -222,3 +222,50 @@ void backwardElimination(int totalFeatures)
     cout << ", which has an accuracy of " << bestOverall << "%\n";
 }
 
+int main()
+{
+    string filename;
+    int choice;
+
+    cout << "Welcome to Advit's Feature Selection Algorithm.\n";
+    cout << "Type in the name of the file to test: ";
+    cin >> filename;
+
+    if (!loadData(filename))
+        return 1;
+
+    int instances = dataset.size();
+    int features = dataset[0].size() - 1;
+
+    cout << "\nThis dataset has "
+         << features
+         << " features (not including the class attribute), with "
+         << instances
+         << " instances.\n";
+
+    set<int> allFeatures;
+    for (int i = 1; i <= features; i++)
+        allFeatures.insert(i);
+
+    double baseAcc = evaluateAccuracy(allFeatures);
+
+    cout << "Running nearest neighbor with all "
+         << features
+         << " features, using \"leaving-one-out\" evaluation, I get an accuracy of "
+         << fixed << setprecision(1) << baseAcc << "%\n";
+
+    cout << "\nType the number of the algorithm you want to run.\n";
+    cout << "1) Forward Selection\n";
+    cout << "2) Backward Elimination\n";
+
+    cin >> choice;
+
+    if (choice == 1)
+        forwardSelection(features);
+    else if (choice == 2)
+        backwardElimination(features);
+    else
+        cout << "Invalid choice.\n";
+
+    return 0;
+}
